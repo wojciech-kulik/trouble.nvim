@@ -15,7 +15,9 @@ local function wrap(name)
     for _, hl in pairs(M.cache[buf] or {}) do
       if hl.enabled then
         TSHighlighter.active[buf] = hl.highlighter
-        TSHighlighter[name](_, win, buf, ...)
+        if TSHighlighter[name] then
+          TSHighlighter[name](_, win, buf, ...)
+        end
       end
     end
     TSHighlighter.active[buf] = nil
